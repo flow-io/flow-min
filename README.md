@@ -14,30 +14,27 @@ $ npm install flow-min
 ## Examples
 
 ``` javascript
-var // Flow min stream generator:
+var eventStream = require( 'event-stream' ),
 	mStream = require( 'flow-min' );
 
-var data = new Array( 1000 ),
-	stream;
-
 // Create some data...
-for ( var i = 0; i < 1000; i++ ) {
+var data = new Array( 1000 );
+for ( var i = 0; i < data.length; i++ ) {
 	data[ i ] = Math.random();
 }
 
+// Create a readable stream:
+var readStream = eventStream.readArray( data );
+
 // Create a new stream:
-stream = mStream().stream();
+var stream = mStream().stream();
 
-// Add a listener:
-stream.on( 'data', function( min ) {
-	console.log( 'Min: ' + min );
-});
-
-// Write the data to the stream...
-for ( var j = 0; j < data.length; j++ ) {
-	stream.write( data[ j ] );
-}
-stream.end();
+// Create a pipeline:
+readStream.pipe( stream )
+	.pipe( eventStream.map( function( d, clbk ) {
+		clbk( null, d.toString() );
+	}))
+	.pipe( process.stdout );
 ```
 
 ## Tests
