@@ -18,7 +18,7 @@
   "main": "./lib",
   "repository": {
     "type": "git",
-    "url": "git://github.com/kgryte/flow-min.git"
+    "url": "git://github.com/flow-io/flow-min.git"
   },
   "keywords": [
     "stream",
@@ -34,7 +34,7 @@
     "stats"
   ],
   "bugs": {
-    "url": "https://github.com/kgryte/flow-min/issues"
+    "url": "https://github.com/flow-io/flow-min/issues"
   },
   "dependencies": {
     "flow-reduce": "~0.0.0"
